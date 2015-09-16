@@ -165,8 +165,11 @@ public class ArtifactImpactToActionSearchItem extends XNavigateItemAction {
                      Artifact assocArt = ArtifactQuery.getArtifactFromId(commitArtId, COMMON);
                      if (assocArt.isOfType(AtsArtifactTypes.TeamWorkflow)) {
                         TeamWorkFlowArtifact twf = (TeamWorkFlowArtifact) assocArt;
-                        rd.addRaw(AHTML.addRowMultiColumnTable(
-                           new String[] {assocArt.getArtifactTypeName(), "Committed", twf.getAtsId(), twf.getName()}));
+                        rd.addRaw(AHTML.addRowMultiColumnTable(new String[] {
+                           assocArt.getArtifactTypeName(),
+                           "Committed",
+                           twf.getAtsId(),
+                           twf.getName()}));
                         committedChanges = true;
                      }
                   }

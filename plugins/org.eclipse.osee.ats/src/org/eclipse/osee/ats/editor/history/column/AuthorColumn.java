@@ -71,6 +71,7 @@ public class AuthorColumn extends XViewerValueColumn {
                } else {
                   name = "unknown for " + author;
                }
+               artIdToName.put(author, name);
             }
             return name;
          } catch (Exception ex) {

@@ -46,7 +46,7 @@ public interface TransactionFactory {
 
    boolean setTxComment(TransactionId txId, String comment);
 
-   boolean replaceWithBaselineTxVersion(String userId, BranchId branchId, TransactionId txId, int artId, String comment);
+   boolean replaceWithBaselineTxVersion(String userId, BranchId branchId, TransactionId txId, Long artId, String comment);
 
    boolean purgeTxs(String txIds);
 

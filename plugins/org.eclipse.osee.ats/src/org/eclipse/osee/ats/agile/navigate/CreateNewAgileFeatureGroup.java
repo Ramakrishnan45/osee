@@ -76,10 +76,10 @@ public class CreateNewAgileFeatureGroup extends XNavigateItemAction {
                      if (firstArtifact == null) {
                         throw new OseeCoreException("Must make a selection");
                      }
-                     int teamId = firstArtifact.getArtId();
+                     Long teamId = firstArtifact.getArtId();
 
                      newGroup.setTeamId(teamId);
-                     Response response = teamApi.createFeatureGroup(new Long(teamId), newGroup);
+                     Response response = teamApi.createFeatureGroup(teamId, newGroup);
                      Object entity = null;
                      if (response != null) {
                         entity = response.readEntity(JaxAgileFeatureGroup.class);

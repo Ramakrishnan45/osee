@@ -118,7 +118,7 @@ public class DataLoaderFactoryImplTest {
    public void testLoadFull() {
       LoadLevel expectedLoadLevel = LoadLevel.ALL;
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.fromTransaction(EXPECTED_TX);
 
@@ -144,7 +144,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
 
@@ -165,7 +165,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current IN (1, 2, 3) AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.includeDeletedArtifacts();
@@ -187,7 +187,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.transaction_id <= jart1.id3 AND txs1.mod_type != 3 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.fromTransaction(EXPECTED_TX);
 
@@ -208,7 +208,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.transaction_id <= jart1.id3 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.fromTransaction(EXPECTED_TX);
       dataLoader.includeDeletedArtifacts();
@@ -232,7 +232,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
 
@@ -254,7 +254,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withAttributeTypes(CoreAttributeTypes.Annotation);
@@ -277,7 +277,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withAttributeTypes(CoreAttributeTypes.Annotation, CoreAttributeTypes.Category);
@@ -301,7 +301,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withAttributeIds(45);
@@ -310,7 +310,7 @@ public class DataLoaderFactoryImplTest {
 
       dataLoader.load(cancellation, builder);
 
-      verifyCommon(EXPECTED_HEAD_TX, expectedLoadLevel, EXCLUDE_DELETED, expected, 45);
+      verifyCommon(EXPECTED_HEAD_TX, expectedLoadLevel, EXCLUDE_DELETED, expected, 45L);
    }
 
    @Test
@@ -324,7 +324,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withAttributeIds(45, 55);
@@ -347,7 +347,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withAttributeIds(45, 55);
@@ -372,7 +372,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withAttributeIds(45);
@@ -382,7 +382,7 @@ public class DataLoaderFactoryImplTest {
 
       dataLoader.load(cancellation, builder);
 
-      verifyCommon(EXPECTED_HEAD_TX, expectedLoadLevel, EXCLUDE_DELETED, expected, 45, CoreAttributeTypes.Annotation);
+      verifyCommon(EXPECTED_HEAD_TX, expectedLoadLevel, EXCLUDE_DELETED, expected, 45L, CoreAttributeTypes.Annotation);
    }
 
    @Test
@@ -396,7 +396,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current IN (1, 2, 3) AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.includeDeletedArtifacts();
@@ -419,7 +419,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.transaction_id <= jart1.id3 AND txs1.mod_type != 3 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.fromTransaction(EXPECTED_TX);
 
@@ -441,7 +441,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.transaction_id <= jart1.id3 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, att1.attr_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.fromTransaction(EXPECTED_TX);
       dataLoader.includeDeletedArtifacts();
@@ -466,7 +466,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
 
@@ -488,7 +488,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current IN (1, 2, 3) AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.includeDeletedArtifacts();
@@ -511,7 +511,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withRelationTypes(CoreRelationTypes.Default_Hierarchical__Child);
@@ -535,7 +535,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withRelationTypes(CoreRelationTypes.Default_Hierarchical__Child,
@@ -561,7 +561,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withRelationIds(45);
@@ -570,7 +570,7 @@ public class DataLoaderFactoryImplTest {
 
       dataLoader.load(cancellation, builder);
 
-      verifyCommon(EXPECTED_HEAD_TX, expectedLoadLevel, EXCLUDE_DELETED, expected, 45);
+      verifyCommon(EXPECTED_HEAD_TX, expectedLoadLevel, EXCLUDE_DELETED, expected, 45L);
    }
 
    @Test
@@ -584,7 +584,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withRelationIds(45, 55);
@@ -607,7 +607,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withRelationIds(45, 55);
@@ -633,7 +633,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current = 1 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.withRelationIds(45);
@@ -643,7 +643,7 @@ public class DataLoaderFactoryImplTest {
 
       dataLoader.load(cancellation, builder);
 
-      verifyCommon(EXPECTED_HEAD_TX, expectedLoadLevel, EXCLUDE_DELETED, expected, 45,
+      verifyCommon(EXPECTED_HEAD_TX, expectedLoadLevel, EXCLUDE_DELETED, expected, 45L,
          CoreRelationTypes.Default_Hierarchical__Child.getGuid());
    }
 
@@ -658,7 +658,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.transaction_id <= jart1.id3 AND txs1.mod_type != 3 AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.fromTransaction(EXPECTED_TX);
 
@@ -679,7 +679,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current IN (1, 2, 3) AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.includeDeletedAttributes();
@@ -703,7 +703,7 @@ public class DataLoaderFactoryImplTest {
             " AND txs1.tx_current IN (1, 2, 3) AND txs1.branch_id = jart1.id1\n" + //
             " ORDER BY txs1.branch_id, jart1.id2, rel1.rel_link_id, txs1.transaction_id desc";
 
-      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1, 2, 3));
+      DataLoader dataLoader = factory.newDataLoaderFromIds(session, COMMON, Arrays.asList(1L, 2L, 3L));
 
       dataLoader.withLoadLevel(expectedLoadLevel);
       dataLoader.includeDeletedRelations();

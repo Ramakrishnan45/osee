@@ -92,8 +92,8 @@ public class OrcsWriterEndpointTest extends AbstractRestTest {
             assertNotNull(folderArt);
             assertEquals(2, folderArt.getChildren().size());
             for (Artifact child : folderArt.getChildren()) {
-               assertTrue(
-                  child.getName().equals("Software Requirement 1") || child.getName().equals("Software Requirement 2"));
+               assertTrue(child.getName().equals("Software Requirement 1") || child.getName().equals(
+                  "Software Requirement 2"));
             }
          }
       }
@@ -109,8 +109,8 @@ public class OrcsWriterEndpointTest extends AbstractRestTest {
 
    @Test
    public void testDelete() throws Exception {
-      Artifact artifact = ArtifactTypeManager.addArtifact(CoreArtifactTypes.GeneralData, CoreBranches.COMMON,
-         getClass().getSimpleName());
+      Artifact artifact =
+         ArtifactTypeManager.addArtifact(CoreArtifactTypes.GeneralData, CoreBranches.COMMON, getClass().getSimpleName());
       artifact.persist(getClass().getSimpleName());
 
       Artifact artifactFromId1 = ArtifactQuery.getArtifactFromToken(artifact);

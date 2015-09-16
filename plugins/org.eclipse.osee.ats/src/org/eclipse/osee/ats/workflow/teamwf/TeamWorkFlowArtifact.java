@@ -51,7 +51,7 @@ import org.eclipse.osee.framework.skynet.core.artifact.IATSStateMachineArtifact;
  */
 public class TeamWorkFlowArtifact extends AbstractWorkflowArtifact implements IAtsTeamWorkflow, IATSStateMachineArtifact {
 
-   private static final Set<Integer> teamArtsWithNoAction = new HashSet<>();
+   private static final Set<Long> teamArtsWithNoAction = new HashSet<>();
    private boolean creatingWorkingBranch = false;
    private boolean committingWorkingBranch = false;
 

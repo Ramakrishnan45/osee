@@ -61,8 +61,7 @@ public class ReportResource {
       Set<Long> modArts = new HashSet<>();
       Set<Long> deletedArts = new HashSet<>();
 
-      Map<Integer, Pair<ChangeItem, Set<ChangeItem>>> artToChanges =
-         new HashMap<Integer, Pair<ChangeItem, Set<ChangeItem>>>();
+      Map<Long, Pair<ChangeItem, Set<ChangeItem>>> artToChanges = new HashMap<>();
 
       buildArtIdToChangeMap(changes, artToChanges);
       buildLists(artToChanges, newArts, modArts, deletedArts);
@@ -83,7 +82,7 @@ public class ReportResource {
          "application/xml").build();
    }
 
-   private void buildArtIdToChangeMap(List<ChangeItem> changes, Map<Integer, Pair<ChangeItem, Set<ChangeItem>>> artToChanges) {
+   private void buildArtIdToChangeMap(List<ChangeItem> changes, Map<Long, Pair<ChangeItem, Set<ChangeItem>>> artToChanges) {
       for (ChangeItem change : changes) {
          int artId = change.getArtId().getId().intValue();
          ChangeType changeType = change.getChangeType();
@@ -110,11 +109,11 @@ public class ReportResource {
       }
    }
 
-   private void buildLists(Map<Integer, Pair<ChangeItem, Set<ChangeItem>>> artToChanges, Set<Long> newArts, Set<Long> modArts, Set<Long> deletedArts) {
+   private void buildLists(Map<Long, Pair<ChangeItem, Set<ChangeItem>>> artToChanges, Set<Long> newArts, Set<Long> modArts, Set<Long> deletedArts) {
       AttributeTypes attributeTypes = orcsApi.getOrcsTypes().getAttributeTypes();
       ArtifactTypes artifactTypes = orcsApi.getOrcsTypes().getArtifactTypes();
 
-      for (Integer artId : artToChanges.keySet()) {
+      for (Long artId : artToChanges.keySet()) {
          Pair<ChangeItem, Set<ChangeItem>> pair = artToChanges.get(artId);
          ChangeItem artChange = pair.getFirst();
          ModificationType modType = artChange.getNetChange().getModType();

@@ -156,9 +156,9 @@ public class PurgeUser extends AbstractBlam {
          rd.addRaw(AHTML.addHeaderRowMultiColumnTable(columnHeaders));
          rd.addRaw(AHTML.addRowMultiColumnTable(new String[] {
             fromUser.getName(),
-            Integer.toString(fromUser.getArtId()),
+            Long.toString(fromUser.getArtId()),
             toUser.getName(),
-            Integer.toString(toUser.getArtId()),
+            Long.toString(toUser.getArtId()),
             Integer.toString(numOfAuthoredTransactions),
             Integer.toString(numOfASideRelations),
             Integer.toString(numOfBSideRelations),
