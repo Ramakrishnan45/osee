@@ -124,7 +124,7 @@ public class UpdateAtsConfiguration {
                      found = true;
                      break;
                   }
-                  if (!found && dbView.getAttrTypeName().equals(defaultView.getAttrTypeName())) {
+                  if (!found && dbView.getAttributeType().equals(defaultView.getAttributeType())) {
                      found = true;
                      break;
                   }

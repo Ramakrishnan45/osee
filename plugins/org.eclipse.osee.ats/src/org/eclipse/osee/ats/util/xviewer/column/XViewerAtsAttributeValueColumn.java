@@ -38,7 +38,6 @@ import org.eclipse.osee.framework.jdk.core.util.Collections;
 import org.eclipse.osee.framework.jdk.core.util.Strings;
 import org.eclipse.osee.framework.logging.OseeLog;
 import org.eclipse.osee.framework.skynet.core.artifact.Artifact;
-import org.eclipse.osee.framework.skynet.core.attribute.AttributeTypeManager;
 import org.eclipse.osee.framework.skynet.core.utility.Artifacts;
 import org.eclipse.osee.framework.ui.plugin.util.AWorkbench;
 import org.eclipse.osee.framework.ui.skynet.util.LogUtil;
@@ -69,7 +68,7 @@ public class XViewerAtsAttributeValueColumn extends XViewerAtsAttributeColumn im
    }
 
    public XViewerAtsAttributeValueColumn(AtsAttributeValueColumn column) {
-      super(AttributeTypeManager.getTypeById(column.getAttrTypeId()), column.getId(), column.getName(),
+      super(column.getAttributeType(), column.getId(), column.getName(), column.getWidth(),
          column.getWidth(), AtsEditors.getXViewerAlign(column.getAlign()), column.isVisible(), getSortDataType(column),
          column.isColumnMultiEdit(), column.getDescription());
       setInheritParent(column.isInheritParent());
