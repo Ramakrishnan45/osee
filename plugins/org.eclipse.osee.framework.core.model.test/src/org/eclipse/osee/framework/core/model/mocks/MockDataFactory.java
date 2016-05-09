@@ -10,18 +10,15 @@
  *******************************************************************************/
 package org.eclipse.osee.framework.core.model.mocks;
 
-import java.util.Date;
 import java.util.Random;
 import org.eclipse.osee.framework.core.data.IAccessContextId;
 import org.eclipse.osee.framework.core.data.IArtifactType;
-import org.eclipse.osee.framework.core.data.IOseeBranch;
 import org.eclipse.osee.framework.core.data.TokenFactory;
 import org.eclipse.osee.framework.core.enums.CoreArtifactTypes;
 import org.eclipse.osee.framework.core.enums.DemoUsers;
 import org.eclipse.osee.framework.core.enums.PermissionEnum;
 import org.eclipse.osee.framework.core.enums.RelationSorter;
 import org.eclipse.osee.framework.core.enums.RelationTypeMultiplicity;
-import org.eclipse.osee.framework.core.enums.TransactionDetailsType;
 import org.eclipse.osee.framework.core.model.OseeEnumEntry;
 import org.eclipse.osee.framework.core.model.TransactionRecord;
 import org.eclipse.osee.framework.core.model.access.AccessDetail;
@@ -67,18 +64,6 @@ public final class MockDataFactory {
          1, 1, "description", "tagger", "mediaType");
       attributeType.setOseeEnumType(oseeEnumTypeFactory.createEnumType(0x01L, "enum type name"));
       return attributeType;
-   }
-
-   public static TransactionRecord createTransaction(int index, long branchUuid) {
-      TransactionDetailsType type =
-         TransactionDetailsType.values[Math.abs(index % TransactionDetailsType.values.length)];
-      int value = index;
-      if (value == 0) {
-         value++;
-      }
-      IOseeBranch branch = IOseeBranch.create(branchUuid, "fake test branch");
-      return new TransactionRecord(value * 47L, branch, "comment_" + value, new Date(), DemoUsers.Joe_Smith, value * 42,
-         type, 0L);
    }
 
    public static OseeEnumEntry createEnumEntry(int index) {
