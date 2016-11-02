@@ -191,7 +191,7 @@ public class AtsChangeSet extends AbstractAtsChangeSet {
             art = getArtifact(storeObject);
          }
          if (art == null) {
-            art = AtsArtifactQuery.getArtifactFromId(atsObject.getId());
+            art = ArtifactQuery.getArtifactFromId(atsObject, AtsUtilCore.getAtsBranch());
          }
       }
       return art;
@@ -216,13 +216,6 @@ public class AtsChangeSet extends AbstractAtsChangeSet {
    @Override
    public void setSoleAttributeValue(IAtsWorkItem workItem, AttributeTypeToken attributeType, String value) {
       Artifact artifact = (Artifact) AtsClientService.get().getQueryService().getArtifact(workItem);
-      artifact.setSoleAttributeValue(attributeType, value);
-      add(artifact);
-   }
-
-   @Override
-   public void setSoleAttributeValue(IAtsObject atsObject, AttributeTypeToken attributeType, Object value) {
-      Artifact artifact = (Artifact) AtsClientService.get().getQueryService().getArtifact(atsObject);
       artifact.setSoleAttributeValue(attributeType, value);
       add(artifact);
    }
