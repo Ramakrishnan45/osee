@@ -55,6 +55,7 @@ public class QueryModule implements HasStatistics<QueryStatistics> {
       txCriteriaFactory = new TransactionCriteriaFactory();
       tupleQuery = queryEngine.createTupleQuery();
       applicabilityDsQuery = queryEngine.createApplicabilityDsQuery();
+      this.queryEngine = queryEngine;
    }
 
    public QueryFactory createQueryFactory(OrcsSession session) {

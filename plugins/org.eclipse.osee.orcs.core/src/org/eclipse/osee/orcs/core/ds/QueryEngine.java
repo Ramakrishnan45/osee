@@ -17,6 +17,7 @@ import org.eclipse.osee.framework.core.data.ArtifactToken;
 import org.eclipse.osee.framework.core.data.Branch;
 import org.eclipse.osee.framework.core.executor.CancellableCallable;
 import org.eclipse.osee.orcs.OrcsSession;
+import org.eclipse.osee.orcs.search.DeepQuery;
 import org.eclipse.osee.orcs.data.TransactionReadable;
 import org.eclipse.osee.orcs.search.TupleQuery;
 
@@ -48,4 +49,6 @@ public interface QueryEngine {
    List<ArtifactId> loadArtifactIds(QueryData queryData);
 
    List<Map<String, Object>> loadMap(QueryData queryData);
+
+   DeepQuery createDeepQuery();
 }

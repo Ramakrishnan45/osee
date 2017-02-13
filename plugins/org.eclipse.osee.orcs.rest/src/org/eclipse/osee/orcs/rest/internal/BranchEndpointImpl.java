@@ -749,4 +749,9 @@ public class BranchEndpointImpl implements BranchEndpoint {
 
       return Response.ok().build();
    }
+
+   @Override
+   public Response deepAttribute(BranchId branch, AttributeTypeId attributeType, String[] values) {
+      return null;
+   }
 }
