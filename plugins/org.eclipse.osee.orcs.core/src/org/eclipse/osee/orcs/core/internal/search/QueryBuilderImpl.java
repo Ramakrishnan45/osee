@@ -134,4 +134,9 @@ public class QueryBuilderImpl extends ArtifactQueryBuilderImpl<QueryBuilder> imp
    public CancellableCallable<ResultSet<? extends ArtifactId>> createSearchResultsAsIds() {
       return queryFactory.createLocalIdSearch(session, getQueryData());
    }
+   }
+
+   @Override
+   public List<Map<String, Object>> load() {
+      return;
 }

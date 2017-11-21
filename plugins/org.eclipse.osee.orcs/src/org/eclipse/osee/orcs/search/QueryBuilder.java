@@ -16,6 +16,9 @@ import org.eclipse.osee.framework.core.data.ArtifactId;
 import org.eclipse.osee.framework.core.data.ArtifactToken;
 import org.eclipse.osee.framework.core.data.AttributeTypeId;
 import org.eclipse.osee.framework.core.executor.CancellableCallable;
+import org.eclipse.osee.framework.core.data.RelationTypeId;
+import org.eclipse.osee.framework.core.data.ValueKind;
+import org.eclipse.osee.framework.core.enums.RelationSide;
 import org.eclipse.osee.framework.jdk.core.type.ResultSet;
 import org.eclipse.osee.orcs.data.ArtifactReadable;
 import org.eclipse.osee.orcs.data.AttributeReadable;
@@ -31,6 +34,27 @@ public interface QueryBuilder extends ArtifactQueryBuilder<QueryBuilder>, Query 
    List<ArtifactToken> loadArtifactTokens();
 
    List<ArtifactId> loadArtifactIds();
+
+   List<Map<String, Object>> load();
+
+   /**
+    * same as select(attributeType, ValueKind.Value)
+    */
+   QueryBuilder select(AttributeTypeId attributeType);
+
+   QueryBuilder select(AttributeTypeId attributeType, ValueKind valueKind);
+
+   QueryBuilder select(AttributeTypeId attributeType, ValueKind[] valueKinds);
+
+   /**
+    * Follows the relation and does not collect any data (no valueKind), so it is only useful if followed by a select
+    * call
+    */
+   QueryBuilder follow(RelationTypeId relationType, RelationSide side);
+
+   QueryBuilder follow(RelationTypeId relationType, RelationSide side, ValueKind valueKind);
+
+   QueryBuilder follow(RelationTypeId relationType, RelationSide side, ValueKind[] valueKinds);
 
    /**
     * @param attributeType is used in place of the natural Name attribute to populate the name fields in the returned
@@ -57,11 +81,10 @@ public interface QueryBuilder extends ArtifactQueryBuilder<QueryBuilder>, Query 
     */
    ResultSet<? extends ArtifactId> getResultsIds();
 
-   /**
-    * Schedule query
-    *
-    * @return artifact search results
-    */
+   *
+   Schedule query**@return
+   artifact search results*/
+
    CancellableCallable<ResultSet<ArtifactReadable>> createSearch();
 
    /**
