@@ -17,7 +17,6 @@ import org.eclipse.osee.ats.api.AtsApi;
 import org.eclipse.osee.ats.api.IAtsConfigObject;
 import org.eclipse.osee.ats.rest.IAtsServer;
 import org.eclipse.osee.framework.core.util.JsonUtil;
-import org.eclipse.osee.jaxrs.mvc.IdentityView;
 import org.eclipse.osee.orcs.OrcsApi;
 import org.eclipse.osee.orcs.data.AttributeTypes;
 
@@ -88,8 +87,7 @@ public class ConfigsJsonWriter implements MessageBodyWriter<Collection<IAtsConfi
          writer = jsonFactory.createJsonGenerator(entityStream);
          writer.writeStartArray();
          for (IAtsConfigObject program : programs) {
-            ConfigJsonWriter.addProgramObject(atsApi, orcsApi, program, annotations, writer,
-               matches(IdentityView.class, annotations), getAttributeTypes());
+            ConfigJsonWriter.addProgramObject(atsApi, orcsApi, program, annotations, writer, getAttributeTypes());
          }
          writer.writeEndArray();
       } finally {
