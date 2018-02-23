@@ -348,8 +348,7 @@ public class TransactionBuilderImpl implements TransactionBuilder {
    @Override
    public TransactionReadable commit() {
       try {
-         CancellableCallable<TransactionReadable> callable = txFactory.createTx(txData);
-         return callable.call();
+         return txFactory.createTx(txData).call();
       } catch (Exception ex) {
          throw OseeCoreException.wrap(ex);
       }
