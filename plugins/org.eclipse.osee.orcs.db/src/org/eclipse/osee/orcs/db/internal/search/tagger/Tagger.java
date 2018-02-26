@@ -13,6 +13,7 @@ package org.eclipse.osee.orcs.db.internal.search.tagger;
 import com.google.common.io.InputSupplier;
 import java.io.InputStream;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.osee.framework.core.enums.QueryOption;
 import org.eclipse.osee.framework.jdk.core.type.MatchLocation;
 
@@ -21,7 +22,7 @@ import org.eclipse.osee.framework.jdk.core.type.MatchLocation;
  */
 public interface Tagger {
 
-   void tagIt(InputSupplier<? extends InputStream> provider, TagCollector collector) throws Exception;
+   void tagIt(InputSupplier<? extends InputStream> provider, Consumer<Long> consumer) throws Exception;
 
    List<MatchLocation> find(InputSupplier<? extends InputStream> provider, String toSearch, boolean matchAllLocations, QueryOption... options) throws Exception;
 
