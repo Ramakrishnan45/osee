@@ -26,6 +26,7 @@ import org.eclipse.osee.framework.core.data.IArtifactType;
 import org.eclipse.osee.framework.core.data.TransactionId;
 import org.eclipse.osee.framework.core.data.UserId;
 import org.eclipse.osee.framework.core.enums.CoreAttributeTypes;
+import org.eclipse.osee.framework.core.enums.QueryOption;
 import org.eclipse.osee.framework.jdk.core.type.MatchLocation;
 import org.eclipse.osee.framework.jdk.core.type.OseeCoreException;
 import org.eclipse.osee.framework.jdk.core.type.ResultSet;
@@ -148,7 +149,7 @@ public class ArtifactEndpointImpl implements ArtifactEndpoint {
          query.andTypeEquals(artifactType);
       }
       if (exists) {
-         query.and(attributeType, value);
+         query.andAttribute(attributeType, value, QueryOption.WHOLE_MATCH, false);
       } else {
          query.andNotExists(attributeType, value);
       }
@@ -192,11 +193,10 @@ public class ArtifactEndpointImpl implements ArtifactEndpoint {
 
    @Override
    public List<ArtifactToken> createArtifacts(BranchId branch, ArtifactTypeId artifactType, ArtifactId parent, List<String> names) {
-      ResultSet<ArtifactReadable> results =
-         query.andTypeEquals(artifactType).and(CoreAttributeTypes.Name, names).getResults();
-      if (!results.isEmpty()) {
-         List<ArtifactReadable> duplicates = results.getList();
-         throw new OseeCoreException("Found %s artifacts of type %s with duplicate names: %s", results.size(),
+      List<ArtifactToken> duplicates = query.andTypeEquals(artifactType).andAttribute(CoreAttributeTypes.Name, names,
+         QueryOption.TOKENIZE_WHITESPACE, false).loadArtifactTokens();
+      if (!duplicates.isEmpty()) {
+         throw new OseeCoreException("Found %s artifacts of type %s with duplicate names: %s", duplicates.size(),
             artifactType, duplicates);
       }
 

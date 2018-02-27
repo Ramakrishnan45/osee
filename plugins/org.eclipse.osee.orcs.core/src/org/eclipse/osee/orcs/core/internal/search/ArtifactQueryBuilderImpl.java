@@ -32,6 +32,7 @@ import org.eclipse.osee.orcs.core.ds.Options;
 import org.eclipse.osee.orcs.core.ds.OptionsUtil;
 import org.eclipse.osee.orcs.core.ds.QueryData;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaArtifactIds;
+import org.eclipse.osee.orcs.core.ds.criteria.CriteriaAttributeHash;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaAttributeTypeNotExists;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaRelatedTo;
 import org.eclipse.osee.orcs.data.ArtifactReadable;
@@ -290,6 +291,21 @@ public class ArtifactQueryBuilderImpl<T> implements ArtifactQueryBuilder<T> {
    public T and(Collection<AttributeTypeId> attributeTypes, Collection<String> value, QueryOption... options) {
       Criteria criteria = criteriaFactory.createAttributeCriteria(attributeTypes, value, options);
       return addAndCheck(getQueryData(), criteria);
+   }
+
+   @Override
+   public T andAttribute(AttributeTypeId attributeType, String value, QueryOption option, boolean caseSensitive) {
+      return addAndCheck(getQueryData(), new CriteriaAttributeHash(attributeType, value, option, caseSensitive));
+   }
+
+   @Override
+   public T andAttribute(AttributeTypeId attributeType, Collection<String> values, QueryOption option, boolean caseSensitive) {
+      return addAndCheck(getQueryData(), new CriteriaAttributeHash(attributeType, values, option, caseSensitive));
+   }
+
+   @Override
+   public T andAttribute(String value, QueryOption option, boolean caseSensitive) {
+      return addAndCheck(getQueryData(), new CriteriaAttributeHash(value, option, caseSensitive));
    }
 
    @Override

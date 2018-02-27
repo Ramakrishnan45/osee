@@ -194,6 +194,27 @@ public interface ArtifactQueryBuilder<T> {
    T and(Collection<AttributeTypeId> attributeTypes, Collection<String> value, QueryOption... options);
 
    /**
+    * Add criteria for attributes of type attributeType with a current value matching the given value per the specified
+    * option. If queryOption is not WHOLE_MATCH then the value will be tokenized per the specified option and a matching
+    * attribute will contain all of the value's tokens.
+    */
+   T andAttribute(AttributeTypeId attributeType, String value, QueryOption option, boolean caseSensitive);
+
+   /**
+    * Add criteria for attributes of type attributeType with a current value matching any of the given values per the
+    * specified option. If queryOption is not WHOLE_MATCH then each value will be tokenized per the specified option and
+    * a matching attribute will contain all of the tokens of at least one of the values.
+    */
+   T andAttribute(AttributeTypeId attributeType, Collection<String> values, QueryOption option, boolean caseSensitive);
+
+   /**
+    * Add criteria for attributes with a current value matching the given value per the specified option. If queryOption
+    * is not WHOLE_MATCH then the value will be tokenized per the specified option and a matching attribute will contain
+    * all of the value's tokens.
+    */
+   T andAttribute(String value, QueryOption option, boolean caseSensitive);
+
+   /**
     * Search for related artifacts
     *
     * @param relationTypeSide the type-side to search on

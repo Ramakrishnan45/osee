@@ -13,7 +13,9 @@ package org.eclipse.osee.orcs.core.internal.indexer;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
+import org.eclipse.osee.framework.core.data.AttributeTypeId;
 import org.eclipse.osee.framework.core.data.Branch;
+import org.eclipse.osee.framework.core.data.GammaId;
 import org.eclipse.osee.framework.core.executor.CancellableCallable;
 import org.eclipse.osee.orcs.OrcsSession;
 import org.eclipse.osee.orcs.core.ds.QueryEngineIndexer;
@@ -72,4 +74,13 @@ public class QueryIndexerImpl implements QueryIndexer {
       return engineIndexer.purgeAllIndexes(session);
    }
 
+   @Override
+   public int createTermHashes(Iterable<GammaId> gammaIds) {
+      return engineIndexer.createTermHashes(gammaIds);
+   }
+
+   @Override
+   public int createTermHashes(AttributeTypeId attributeType) {
+      return engineIndexer.createTermHashes(attributeType);
+   }
 }

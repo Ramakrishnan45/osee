@@ -356,8 +356,8 @@ public abstract class AbstractSqlWriter implements HasOptions {
       }
    }
 
-   public void write(String sql) {
-      output.append(sql);
+   public void write(String data) {
+      output.append(data);
    }
 
    public void writeEquals(String table1, String table2, String column) {

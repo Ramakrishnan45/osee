@@ -22,6 +22,7 @@ public enum TableEnum {
    RELATION_TABLE("osee_relation_link", "rel", ObjectType.RELATION),
    CHAR_JOIN_TABLE("osee_join_char_id", "jch"),
    ID_JOIN_TABLE("osee_join_id", "jid"),
+   SEARCH_HASH_TABLE("osee_search_hash", "hsh"),
    SEARCH_TAGS_TABLE("osee_search_tags", "tag"),
    JOIN_ID4_TABLE("osee_join_id4", "jart"),
    MERGE_TABLE("osee_merge", "mbr");
