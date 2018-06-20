@@ -94,37 +94,37 @@ public class CreateDemoBranches {
 
       configureProducts(tx, products);
 
-      configureFeature(tx, "Feature 1", products, "Excluded", "Included", "Excluded", "Included");
-      configureFeature(tx, "Unit Type", products, "Metric", "Metric", "Metric", "English");
-      configureFeature(tx, "Feature 3", products, "Excluded", "Included", "Included", "Excluded");
-      configureFeature(tx, "Feature 4", products, "Included", "Included", "Included", "Excluded");
+      configureFeature(tx, "LAD", products, "Excluded", "Included", "Excluded", "Included");
+      configureFeature(tx, "JSOW", products, "Included", "Included", "Included", "Excluded");
+      configureFeature(tx, "IRST", products, "Excluded", "Included", "Included", "Excluded");
+      configureFeature(tx, "EA-18G", products, "Included", "Included", "Included", "Excluded");
 
       ArtifactId featureDefinition = tx.createArtifact(CoreArtifactTokens.ProductsFolder,
          CoreArtifactTypes.FeatureDefinition, "Feature Definition");
 
-      String featureDefJson = "[{" + "\"name\": \"Feature 1\"," + //
+      String featureDefJson = "[{" + "\"name\": \"LAD\"," + //
          "\"type\": \"single\"," + //
          "\"values\": [\"Included\", \"Excluded\"]," + //
          "\"defaultValue\": \"Included\"," + //
-         "\"description\": \"A significant capability\"" + //
+         "\"description\": \"Large Area Display\"" + //
          "}, {" + //
-         "\"name\": \"Unit Type\"," + //
-         "\"type\": \"single\"," + //
-         "\"values\": [\"Metric\", \"English\"]," + //
-         "\"defaultValue\": \"\"," + //
-         "\"description\": \"Used select type of units\"" + //
-         "},{" + //
-         "\"name\": \"Feature 3\"," + //
+         "\"name\": \"JSOW\"," + //
          "\"type\": \"single\"," + //
          "\"values\": [\"Included\", \"Excluded\"]," + //
          "\"defaultValue\": \"Included\"," + //
-         "\"description\": \"A small point of variation\"" + //
+         "\"description\": \"Joint Stand-Off Weapon\"" + //
          "},{" + //
-         "\"name\": \"Feature 4\"," + //
+         "\"name\": \"EA-18G\"," + //
          "\"type\": \"single\"," + //
          "\"values\": [\"Included\", \"Excluded\"]," + //
          "\"defaultValue\": \"Included\"," + //
-         "\"description\": \"This feature depends of Feature 1\"" + //
+         "\"description\": \"Electronic Attack Growler\"" + //
+         "},{" + //
+         "\"name\": \"IRST\"," + //
+         "\"type\": \"single\"," + //
+         "\"values\": [\"Included\", \"Excluded\"]," + //
+         "\"defaultValue\": \"Included\"," + //
+         "\"description\": \"Infra-Red Search and Track (sensor)\"" + //
          "}" + //
          "]";
 
