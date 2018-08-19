@@ -24,8 +24,10 @@ import org.eclipse.osee.ats.api.user.AtsCoreUsers;
 import org.eclipse.osee.ats.api.user.IAtsUser;
 import org.eclipse.osee.ats.api.user.IAtsUserService;
 import org.eclipse.osee.ats.api.util.AtsUserNameComparator;
+import org.eclipse.osee.framework.core.data.UserId;
 import org.eclipse.osee.framework.core.data.UserToken;
 import org.eclipse.osee.framework.core.enums.Active;
+import org.eclipse.osee.framework.core.enums.SystemUser;
 import org.eclipse.osee.framework.jdk.core.util.Strings;
 
 /**
@@ -85,6 +87,12 @@ public abstract class AbstractAtsUserService implements IAtsUserService {
          }
       }
       return atsUser;
+   }
+
+   @Override
+   public IAtsUser getUserByAccountId(UserId accountId) {
+      Long id = accountId == null ? SystemUser.Anonymous.getId() : accountId.getId();
+      return getUserByAccountId(id);
    }
 
    @Override

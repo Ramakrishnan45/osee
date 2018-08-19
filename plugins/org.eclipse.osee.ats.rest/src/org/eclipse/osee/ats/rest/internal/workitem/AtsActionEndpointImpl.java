@@ -23,6 +23,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -30,7 +31,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -68,8 +68,10 @@ import org.eclipse.osee.framework.core.data.ArtifactId;
 import org.eclipse.osee.framework.core.data.ArtifactToken;
 import org.eclipse.osee.framework.core.data.AttributeTypeId;
 import org.eclipse.osee.framework.core.data.BranchId;
+import org.eclipse.osee.framework.core.data.OseeClient;
 import org.eclipse.osee.framework.core.data.TransactionId;
 import org.eclipse.osee.framework.core.data.TransactionToken;
+import org.eclipse.osee.framework.core.data.UserId;
 import org.eclipse.osee.framework.core.enums.QueryOption;
 import org.eclipse.osee.framework.core.exception.OseeWrappedException;
 import org.eclipse.osee.framework.jdk.core.type.OseeArgumentException;
@@ -88,15 +90,18 @@ import org.eclipse.osee.orcs.transaction.TransactionFactory;
  */
 @Path("action")
 public final class AtsActionEndpointImpl implements AtsActionEndpointApi {
-   private final AtsApi atsApi;
    private final OrcsApi orcsApi;
    private static final String ATS_UI_ACTION_PREFIX = "/ui/action/ID";
-
-   @Context
-   private HttpHeaders httpHeaders;
+   private final AtsApi atsApi;
    private final IAtsQueryService atsQueryService;
 
+   @HeaderParam(OseeClient.OSEE_ACCOUNT_ID)
+   private UserId accountId;
    public AtsActionEndpointImpl(AtsApi atsApi, OrcsApi orcsApi) {
+
+
+
+
       this.atsApi = atsApi;
       this.orcsApi = orcsApi;
       atsQueryService = atsApi.getQueryService();
@@ -259,10 +264,7 @@ public final class AtsActionEndpointImpl implements AtsActionEndpointApi {
    public Attribute setActionAttributeByType(@PathParam("id") String id, @PathParam("attrTypeIdOrKey") String attrTypeIdOrKey, List<String> values) {
       Conditions.assertNotNull(values, "values can not be null");
       IAtsWorkItem workItem = atsQueryService.getWorkItem(id);
-      IAtsUser asUser = atsApi.getUserService().getUserByAccountId(httpHeaders);
-      if (asUser == null) {
-         asUser = AtsCoreUsers.SYSTEM_USER;
-      }
+      IAtsUser asUser = atsApi.getUserService().getUserByAccountId(accountId);
       ActionOperations ops = new ActionOperations(asUser, workItem, atsApi, orcsApi);
       return ops.setActionAttributeByType(id, attrTypeIdOrKey, values);
    }
@@ -297,10 +299,7 @@ public final class AtsActionEndpointImpl implements AtsActionEndpointApi {
    @Consumes({MediaType.APPLICATION_JSON})
    public Collection<ArtifactToken> setByArtifactToken(@PathParam("workItemId") String workItemId, @PathParam("changeType") String changeType, Collection<ArtifactToken> artifacts) {
       IAtsWorkItem workItem = atsQueryService.getWorkItem(workItemId);
-      IAtsUser asUser = atsApi.getUserService().getUserByAccountId(httpHeaders);
-      if (asUser == null) {
-         asUser = AtsCoreUsers.SYSTEM_USER;
-      }
+      IAtsUser asUser = atsApi.getUserService().getUserByAccountId(accountId);
       ActionOperations ops = new ActionOperations(asUser, workItem, atsApi, orcsApi);
       return ops.setByArtifactToken(workItem, changeType, artifacts);
 
@@ -381,8 +380,7 @@ public final class AtsActionEndpointImpl implements AtsActionEndpointApi {
             try {
                List<StateType> stateTypes = new LinkedList<>();
                for (String type : entry.getValue()) {
-                  StateType stateType2 = StateType.valueOf(type);
-                  stateTypes.add(stateType2);
+                  stateTypes.add(StateType.valueOf(type));
                }
                query.andStateType(stateTypes.toArray(new StateType[stateTypes.size()]));
             } catch (Exception ex) {
