@@ -11,6 +11,7 @@
 package org.eclipse.osee.orcs.core.internal.search;
 
 import java.util.List;
+import java.util.Map;
 import org.eclipse.osee.framework.core.data.ArtifactId;
 import org.eclipse.osee.framework.core.data.ArtifactToken;
 import org.eclipse.osee.framework.core.data.AttributeTypeId;
@@ -22,6 +23,7 @@ import org.eclipse.osee.orcs.OrcsSession;
 import org.eclipse.osee.orcs.core.ds.QueryData;
 import org.eclipse.osee.orcs.core.ds.QueryEngine;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaIdQuery;
+import org.eclipse.osee.orcs.core.ds.criteria.CriteriaSelectiveLoad;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaTokenQuery;
 import org.eclipse.osee.orcs.data.ArtifactReadable;
 import org.eclipse.osee.orcs.data.AttributeReadable;
@@ -62,6 +64,12 @@ public class QueryBuilderImpl extends ArtifactQueryBuilderImpl<QueryBuilder> imp
    public List<ArtifactToken> loadArtifactTokens(AttributeTypeId attributeType) {
       getQueryData().addCriteria(new CriteriaTokenQuery(attributeType));
       return queryEngine.loadArtifactTokens(getQueryData());
+   }
+
+   @Override
+   public List<Map<String, Object>> loadMaps() {
+      getQueryData().addCriteria(new CriteriaSelectiveLoad());
+      return queryEngine.loadMap(getQueryData());
    }
 
    @Override

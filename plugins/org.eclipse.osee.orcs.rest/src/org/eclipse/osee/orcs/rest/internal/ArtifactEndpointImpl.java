@@ -13,6 +13,7 @@ package org.eclipse.osee.orcs.rest.internal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import javax.ws.rs.core.UriInfo;
 import org.eclipse.osee.framework.core.data.ArtifactId;
@@ -182,6 +183,11 @@ public class ArtifactEndpointImpl implements ArtifactEndpoint {
    @Override
    public List<ArtifactId> getArtifactIdsByType(ArtifactTypeId artifactType) {
       return query.andTypeEquals(artifactType).loadArtifactIds();
+   }
+
+   @Override
+   public List<Map<String, Object>> getArtifactMapsByAttribute(AttributeTypeId attributeType, String value, boolean exists, ArtifactTypeId artifactType) {
+      return getArtifactXByAttribute(attributeType, value, exists, artifactType, query::loadMaps);
    }
 
    @Override

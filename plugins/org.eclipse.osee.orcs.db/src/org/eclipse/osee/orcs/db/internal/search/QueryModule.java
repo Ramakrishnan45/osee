@@ -25,6 +25,7 @@ import org.eclipse.osee.orcs.data.ArtifactTypes;
 import org.eclipse.osee.orcs.data.AttributeTypes;
 import org.eclipse.osee.orcs.db.internal.IdentityLocator;
 import org.eclipse.osee.orcs.db.internal.loader.SqlObjectLoader;
+import org.eclipse.osee.orcs.db.internal.proxy.AttributeDataProxyFactory;
 import org.eclipse.osee.orcs.db.internal.search.engines.QueryEngineImpl;
 import org.eclipse.osee.orcs.db.internal.search.indexer.IndexerConstants;
 import org.eclipse.osee.orcs.db.internal.search.tagger.TaggingEngine;
@@ -70,7 +71,7 @@ public class QueryModule {
       return queryIndexer;
    }
 
-   public QueryEngine createQueryEngine(DataLoaderFactory loaderFactory, AttributeTypes attrTypes, ArtifactTypes artifactTypes, SqlObjectLoader sqlObjectLoader) {
+   public QueryEngine createQueryEngine(DataLoaderFactory loaderFactory, AttributeTypes attrTypes, ArtifactTypes artifactTypes, SqlObjectLoader sqlObjectLoader, AttributeDataProxyFactory proxyFactory) {
       QuerySqlContextFactory artifactSqlContextFactory =
          Engines.createArtifactSqlContext(logger, sqlJoinFactory, idService, jdbcClient, taggingEngine);
       QueryCallableFactory factory1 = newArtifactQueryEngine(artifactSqlContextFactory, logger, taggingEngine,
@@ -83,6 +84,6 @@ public class QueryModule {
       QueryCallableFactory factory4 = newQueryEngine(logger, sqlJoinFactory, idService, jdbcClient, taggingEngine,
          executorAdmin, loaderFactory, attrTypes);
       return new QueryEngineImpl(factory1, branchSqlContextFactory, txSqlContextFactory, factory4, jdbcClient,
-         sqlJoinFactory, artifactSqlContextFactory, sqlObjectLoader, artifactTypes);
+         sqlJoinFactory, artifactSqlContextFactory, sqlObjectLoader, proxyFactory, artifactTypes);
    }
 }

@@ -11,6 +11,7 @@
 package org.eclipse.osee.orcs.rest.model;
 
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -80,6 +81,11 @@ public interface ArtifactEndpoint {
    @Path("type/{artifactType}/id")
    @Produces(MediaType.APPLICATION_JSON)
    List<ArtifactId> getArtifactIdsByType(@PathParam("artifactType") ArtifactTypeId artifactType);
+
+   @GET
+   @Path("attType/{attributeType}/id")
+   @Produces(MediaType.APPLICATION_JSON)
+   List<Map<String, Object>> getArtifactMapsByAttribute(@PathParam("attributeType") AttributeTypeId attributeType, @QueryParam("value") String value, @DefaultValue("true") @QueryParam("exists") boolean exists, @DefaultValue("-1") @QueryParam("artifactType") ArtifactTypeId artifactType);
 
    /**
     * error if an artifact with the same name and type already exist

@@ -11,6 +11,7 @@
 package org.eclipse.osee.orcs.core.ds;
 
 import java.util.List;
+import java.util.Map;
 import org.eclipse.osee.framework.core.data.ArtifactId;
 import org.eclipse.osee.framework.core.data.ArtifactToken;
 import org.eclipse.osee.framework.core.data.Branch;
@@ -45,4 +46,6 @@ public interface QueryEngine {
    List<ArtifactToken> loadArtifactTokens(QueryData queryData);
 
    List<ArtifactId> loadArtifactIds(QueryData queryData);
+
+   List<Map<String, Object>> loadMap(QueryData queryData);
 }

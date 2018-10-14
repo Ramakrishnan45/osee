@@ -13,6 +13,7 @@ package org.eclipse.osee.orcs.db.internal.search.engines;
 import static org.eclipse.osee.jdbc.JdbcConstants.JDBC__MAX_FETCH_SIZE;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import org.eclipse.osee.framework.core.data.ArtifactId;
 import org.eclipse.osee.framework.core.data.ArtifactToken;
@@ -29,6 +30,7 @@ import org.eclipse.osee.orcs.core.ds.criteria.CriteriaAttributeKeywords;
 import org.eclipse.osee.orcs.data.ArtifactTypes;
 import org.eclipse.osee.orcs.data.TransactionReadable;
 import org.eclipse.osee.orcs.db.internal.loader.SqlObjectLoader;
+import org.eclipse.osee.orcs.db.internal.proxy.AttributeDataProxyFactory;
 import org.eclipse.osee.orcs.db.internal.search.QueryCallableFactory;
 import org.eclipse.osee.orcs.db.internal.search.QuerySqlContext;
 import org.eclipse.osee.orcs.db.internal.search.QuerySqlContextFactory;
@@ -49,8 +51,9 @@ public class QueryEngineImpl implements QueryEngine {
    private final QuerySqlContextFactory artifactSqlContextFactory;
    private final SqlObjectLoader sqlObjectLoader;
    private final ArtifactTypes artifactTypes;
+   private final AttributeDataProxyFactory proxyFactory;
 
-   public QueryEngineImpl(QueryCallableFactory artifactQueryEngineFactory, QuerySqlContextFactory branchSqlContextFactory, QuerySqlContextFactory txSqlContextFactory, QueryCallableFactory allQueryEngineFactory, JdbcClient jdbcClient, SqlJoinFactory sqlJoinFactory, QuerySqlContextFactory artifactSqlContextFactory, SqlObjectLoader sqlObjectLoader, ArtifactTypes artifactTypes) {
+   public QueryEngineImpl(QueryCallableFactory artifactQueryEngineFactory, QuerySqlContextFactory branchSqlContextFactory, QuerySqlContextFactory txSqlContextFactory, QueryCallableFactory allQueryEngineFactory, JdbcClient jdbcClient, SqlJoinFactory sqlJoinFactory, QuerySqlContextFactory artifactSqlContextFactory, SqlObjectLoader sqlObjectLoader, AttributeDataProxyFactory proxyFactory, ArtifactTypes artifactTypes) {
       this.artifactQueryEngineFactory = artifactQueryEngineFactory;
       this.branchSqlContextFactory = branchSqlContextFactory;
       this.txSqlContextFactory = txSqlContextFactory;
@@ -59,6 +62,7 @@ public class QueryEngineImpl implements QueryEngine {
       this.sqlJoinFactory = sqlJoinFactory;
       this.artifactSqlContextFactory = artifactSqlContextFactory;
       this.sqlObjectLoader = sqlObjectLoader;
+      this.proxyFactory = proxyFactory;
       this.artifactTypes = artifactTypes;
    }
 
@@ -134,6 +138,13 @@ public class QueryEngineImpl implements QueryEngine {
       List<ArtifactId> ids = new ArrayList<>(100);
       loadArtifactX(queryData, QueryType.ID, stmt -> ids.add(ArtifactId.valueOf(stmt.getLong("art_id"))));
       return ids;
+   }
+
+   @Override
+   public List<Map<String, Object>> loadMap(QueryData queryData) {
+      SelectiveLoader loader = new SelectiveLoader(proxyFactory, "art_id");
+      loadArtifactX(queryData, QueryType.SELECTIVE, loader::load);
+      return loader.getResults();
    }
 
    private void loadArtifactX(QueryData queryData, QueryType queryType, Consumer<JdbcStatement> consumer) {

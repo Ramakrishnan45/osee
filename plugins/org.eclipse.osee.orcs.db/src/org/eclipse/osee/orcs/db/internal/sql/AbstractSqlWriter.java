@@ -81,11 +81,15 @@ public abstract class AbstractSqlWriter implements HasOptions {
    }
 
    public boolean isCountQueryType() {
-      return QueryType.COUNT == queryType;
+      return queryType.equals(QueryType.COUNT);
    }
 
    public boolean isTokenQueryType() {
-      return QueryType.TOKEN == queryType;
+      return queryType.equals(QueryType.TOKEN);
+   }
+
+   public boolean isSelectiveLoadType() {
+      return queryType.equals(QueryType.SELECTIVE);
    }
 
    protected void write(Iterable<SqlHandler<?>> handlers) {

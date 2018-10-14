@@ -43,6 +43,7 @@ import org.eclipse.osee.orcs.core.ds.criteria.CriteriaRelationTypeFollow;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaRelationTypeNotExists;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaRelationTypeSideExists;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaRelationTypeSideNotExists;
+import org.eclipse.osee.orcs.core.ds.criteria.CriteriaSelectiveLoad;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaTokenQuery;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaTxBranchIds;
 import org.eclipse.osee.orcs.core.ds.criteria.CriteriaTxComment;
@@ -98,6 +99,7 @@ public final class SqlHandlerFactoryUtil {
    }
 
    private static void addArtifactHandlers(Map<Class<? extends Criteria>, Class<? extends SqlHandler<?>>> handleMap) {
+      handleMap.put(CriteriaSelectiveLoad.class, SelectiveLoadHandler.class);
       handleMap.put(CriteriaIdQuery.class, IdQueryHandler.class);
       handleMap.put(CriteriaTokenQuery.class, TokenQueryHandler.class);
       handleMap.put(CriteriaArtifactGuids.class, ArtifactGuidSqlHandler.class);
