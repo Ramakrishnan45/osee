@@ -86,6 +86,8 @@ public interface ModificationType extends NamedId {
     */
    public static ModificationType valueOf(long id) {
       switch ((int) id) {
+         case -1:
+            return SENTINEL;
          case 1:
             return NEW;
          case 2:

@@ -25,7 +25,7 @@ public final class ChangeVersion {
    private String value;
 
    public ChangeVersion() {
-      this(null, null, null, null);
+      this(null, null, ModificationType.SENTINEL, null);
    }
 
    public ChangeVersion(GammaId gammaId, ModificationType modType, ApplicabilityToken appId) {
